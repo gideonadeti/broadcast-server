@@ -1,6 +1,10 @@
 {
+  "name": "broadcast-server",
   "main": "./build/index.js",
   "license": "MIT",
+  "bin": {
+    "broadcast-server": "./build/index.js"
+  },
   "scripts": {
     "dev": "tsc -w",
     "clean": "rimraf build",
@@ -9,8 +13,13 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "@types/ws": "^8.18.1",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "ws": "^8.18.1"
   }
 }
