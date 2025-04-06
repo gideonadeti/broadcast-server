@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "main": "./build/index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc -w",
+    "clean": "rimraf build",
+    "build": "npm run clean && tsc",
+    "start": "node ./build/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
