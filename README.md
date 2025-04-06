@@ -86,6 +86,10 @@ You can send messages to the broadcast server from any of the connected clients.
 
 To disconnect from the broadcast server, send the message "exit" from the client terminal. The client will then disconnect from the server.
 
+### 6. Stop the broadcast server
+
+To stop the broadcast server, send the message "stop" from the server terminal. The server will then shut down and all connected clients will disconnect.
+
 ## Background
 
 This project is part of the [roadmap.sh](https://roadmap.sh) backend development roadmap and can be found [here](https://roadmap.sh/projects/broadcast-server).
