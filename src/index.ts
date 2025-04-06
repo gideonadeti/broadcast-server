@@ -2,8 +2,8 @@
 
 import { Command } from "commander";
 
-import startServer from "./server";
 import connectClient from "./client";
+import { startServer, stopServer } from "./server";
 
 const program = new Command();
 
@@ -18,6 +18,7 @@ program
   .option("--port <port>", "Port to listen on", "8080")
   .action((options) => {
     const port = parseInt(options.port, 10);
+
     startServer(port);
   });
 
@@ -27,7 +28,18 @@ program
   .option("--port <port>", "Port to connect to", "8080")
   .action((options) => {
     const port = parseInt(options.port, 10);
+
     connectClient(port);
+  });
+
+program
+  .command("stop")
+  .description("Stop the WebSocket server")
+  .option("--port <port>", "Port to stop the server on", "8080")
+  .action((options) => {
+    const port = parseInt(options.port, 10);
+
+    stopServer(port);
   });
 
 program.parse(process.argv);

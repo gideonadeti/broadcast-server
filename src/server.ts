@@ -1,7 +1,15 @@
 import WebSocket, { WebSocketServer } from "ws";
 
-const startServer = (port: number) => {
-  const wss = new WebSocketServer({ port });
+let wss: WebSocketServer | null = null;
+
+export const startServer = (port: number) => {
+  if (wss) {
+    console.log("Server is already running.");
+
+    return;
+  }
+
+  wss = new WebSocketServer({ port });
 
   wss.on("connection", (ws) => {
     console.log("Client connected");
@@ -10,11 +18,13 @@ const startServer = (port: number) => {
       console.log("Received:", message.toString());
 
       // Broadcast to all other clients
-      wss.clients.forEach((client) => {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(message.toString());
-        }
-      });
+      if (wss) {
+        wss.clients.forEach((client) => {
+          if (client !== ws && client.readyState === WebSocket.OPEN) {
+            client.send(message.toString());
+          }
+        });
+      }
     });
 
     ws.on("close", () => {
@@ -25,4 +35,16 @@ const startServer = (port: number) => {
   console.log(`Server is running at ws://localhost:${port}`);
 };
 
-export default startServer;
+export const stopServer = (port: number) => {
+  if (wss) {
+    console.log(`Stopping the WebSocket server on port ${port}...`);
+
+    wss.close(() => {
+      console.log("Server stopped gracefully.");
+
+      wss = null;
+    });
+  } else {
+    console.log(`No server running on port ${port}.`);
+  }
+};
