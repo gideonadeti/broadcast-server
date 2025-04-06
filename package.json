@@ -1,5 +1,6 @@
 {
   "name": "broadcast-server",
+  "description": "A CLI app that starts a broadcast server, allowing clients to connect and send messages that are broadcast to all connected clients.",
   "main": "./build/index.js",
   "license": "MIT",
   "bin": {
